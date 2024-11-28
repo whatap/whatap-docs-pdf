@@ -62,14 +62,14 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.WHATAP_DOCS_TOKEN }}
       with:
         tag_name: v2.11.0 # 생성할 Release의 태그 이름
-        release_name: "v2.11.0(KO)"
+        release_name: "v2.11.0_KO"
         body: "WhaTap Docs v2.11.0 기준으로 생성되 PDF 파일입니다."
         draft: false
         prerelease: false
 
     - name: Upload PDFs using GitHub CLI
       run: |
-        gh release upload v2.11.0(KO) pdf/*.pdf
+        gh release upload v2.11.0_KO pdf/*.pdf
       env:
         GITHUB_TOKEN: ${{ secrets.WHATAP_DOCS_TOKEN }}
     
