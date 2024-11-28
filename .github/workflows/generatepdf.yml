@@ -16,7 +16,7 @@ env:
 jobs:
   build-n-deploy:
     name: Generate PDF
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     steps:
     - uses: actions/checkout@v4
 
@@ -39,17 +39,17 @@ jobs:
         yes "" | sudo ./install.sh
 
     - name: Install pdfcpu
-      run: sudo dnf install golang-github-pdfcpu
+      run: brew install pdfcpu
 
     - name: Build PDF
       run: |
-        npx docusaurus-prince-pdf -u https://docs.whatap.io/cover-java --prince-args="--page-size='a4' --page-margin='10mm' --style='custom.css'" -o ./pdf/whatap-apm-java-monitoring.pdf --dest ./pdf --include-index
-        pdfcpu annot remove -pages 1 ./pdf/whatap-apm-java-monitoring.pdf
+        npx docusaurus-prince-pdf -u https://docs.whatap.io/cover-url --prince-args="--page-size='a4' --page-margin='10mm' --style='custom.css'" -o ./pdf/whatap-url-monitoring.pdf --dest ./pdf --include-index
+        pdfcpu annot remove -pages 1 ./pdf/whatap-url-monitoring.pdf
 
     - name: Upload results
       uses: actions/upload-artifact@v3
       with:
         name: whatap-apm-java-monitoring
         # The output filename can be specified with --output option
-        path: pdf/whatap-apm-java-monitoring.pdf
+        path: pdf/whatap-url-monitoring.pdf
         if-no-files-found: error
