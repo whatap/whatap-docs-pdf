@@ -69,7 +69,7 @@ jobs:
 
     - name: Upload PDFs using GitHub CLI
       run: |
-        gh release upload v1.0.0 pdf/*.pdf
+        gh release upload v2.11.0(KO) pdf/*.pdf
       env:
         GITHUB_TOKEN: ${{ secrets.WHATAP_DOCS_TOKEN }}
     
