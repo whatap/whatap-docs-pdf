@@ -12,8 +12,6 @@ permissions:
 
 env:
   PRINCE_VER: 15.3
-  DOCKERHUB_SLUG: openbayes/docusaurus-prince-pdf
-  GHCR_SLUG: ghcr.io/signcl/docusaurus-prince-pdf
 
 jobs:
   build-n-deploy:
@@ -41,7 +39,7 @@ jobs:
         yes "" | sudo ./install.sh
 
     - name: Build PDF
-      run: npx docusaurus-prince-pdf -u https://docs.whatap.io/cover-java --prince-args="--javascript --page-size='a4' --page-margin='10mm' --style='./custom.css'" -o ./pdf/whatap-apm-java-monitoring.pdf --dest ./pdf --include-index
+      run: npx docusaurus-prince-pdf -u https://docs.whatap.io/cover-java --prince-args="--page-size='a4' --page-margin='10mm' --style='custom.css'" -o ./pdf/whatap-apm-java-monitoring.pdf --dest ./pdf --include-index
 
     - name: Upload results
       uses: actions/upload-artifact@v3
