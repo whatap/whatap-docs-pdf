@@ -1,0 +1,52 @@
+name: Generate PDF
+
+on:
+  workflow_dispatch:
+    inputs:
+      name:
+        description: "Deployment?"
+        default: "WhaTap"
+
+permissions:
+  contents: write
+
+env:
+  PRINCE_VER: 15.3
+  DOCKERHUB_SLUG: openbayes/docusaurus-prince-pdf
+  GHCR_SLUG: ghcr.io/signcl/docusaurus-prince-pdf
+
+jobs:
+  build-n-deploy:
+    name: Generate PDF
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Install Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: 20
+
+    - name: Install bun
+      uses: oven-sh/setup-bun@v1
+
+    - name: Install dependencies
+      run: bun install
+
+    - name: Install Prince
+      run: |
+        curl https://www.princexml.com/download/prince-${{ env.PRINCE_VER }}-linux-generic-x86_64.tar.gz -O
+        tar zxf prince-${{ env.PRINCE_VER }}-linux-generic-x86_64.tar.gz
+        cd prince-${{ env.PRINCE_VER }}-linux-generic-x86_64
+        yes "" | sudo ./install.sh
+
+    - name: Build PDF
+      run: npx docusaurus-prince-pdf -u https://docs.whatap.io/cover-java --prince-args="--javascript --page-size='a4' --page-margin='10mm' --style='./custom.css'" -o ./pdf/whatap-apm-java-monitoring.pdf --dest ./pdf --include-index
+
+    - name: Upload results
+      uses: actions/upload-artifact@v3
+      with:
+        name: result
+        # The output filename can be specified with --output option
+        path: pdf/whatap-apm-java-monitoring.pdf
+        if-no-files-found: error
