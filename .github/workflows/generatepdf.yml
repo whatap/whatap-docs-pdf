@@ -33,9 +33,9 @@ jobs:
 
     - name: Install Prince
       run: |
-        curl https://www.princexml.com/download/prince-${{ env.PRINCE_VER }}-linux-generic-x86_64.tar.gz -O
-        tar zxf prince-${{ env.PRINCE_VER }}-linux-generic-x86_64.tar.gz
-        cd prince-${{ env.PRINCE_VER }}-linux-generic-x86_64
+        curl https://www.princexml.com/download/prince-${{ env.PRINCE_VER }}-macos.zip -O
+        tar zxf prince-${{ env.PRINCE_VER }}-macos.zip
+        cd prince-${{ env.PRINCE_VER }}-macos
         yes "" | sudo ./install.sh
 
     - name: Install pdfcpu
