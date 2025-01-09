@@ -1,0 +1,102 @@
+name: Partner-Generate PDF KO
+
+on:
+  workflow_dispatch:
+    inputs:
+      name:
+        description: "Deployment?"
+        default: "WhaTap"
+
+permissions:
+  contents: write
+
+env:
+  PRINCE_VER: 15.3
+
+jobs:
+  build-n-deploy:
+    name: Generate PDF
+    runs-on: macos-latest
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Install Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: 20
+
+    - name: Install dependencies
+      run: npm install
+
+    - name: Install Prince
+      run: |
+        curl https://www.princexml.com/download/prince-${{ env.PRINCE_VER }}-macos.zip -O
+        tar zxf prince-${{ env.PRINCE_VER }}-macos.zip
+        cd prince-${{ env.PRINCE_VER }}-macos
+        yes "" | sudo ./install.sh
+
+    - name: Install pdfcpu
+      run: brew install pdfcpu
+
+    - name: Build PDF
+      run: |
+        npx docusaurus-prince-pdf -u https://whatap.github.io/server-op-docs/cover/cover-sitemng --prince-args="--page-size='a4' --page-margin='10mm' --style='./pdf-print.css'" -o ./pdf/whatap-site-management.pdf --dest ./pdf --include-index
+        pdfcpu annot remove -pages 1 ./pdf/whatap-site-management.pdf
+        npx docusaurus-prince-pdf -u https://whatap.github.io/server-op-docs/cover/cover-serverinstall --prince-args="--page-size='a4' --page-margin='10mm' --style='./pdf-print.css'" -o ./pdf/whatap-server-installation.pdf --dest ./pdf --include-index
+        pdfcpu annot remove -pages 1 ./pdf/whatap-server-installation.pdf
+        npx docusaurus-prince-pdf -u https://whatap.github.io/server-op-docs/cover/cover-mxql --prince-args="--page-size='a4' --page-margin='10mm' --style='./pdf-print.css'" -o ./pdf/whatap-mxql-usage.pdf --dest ./pdf --include-index
+        pdfcpu annot remove -pages 1 ./pdf/whatap-mxql-usage.pdf
+        npx docusaurus-prince-pdf -u https://whatap.github.io/server-op-docs/cover/cover-faq --prince-args="--page-size='a4' --page-margin='10mm' --style='./pdf-print.css'" -o ./pdf/whatap-partner-faq.pdf --dest ./pdf --include-index
+        pdfcpu annot remove -pages 1 ./pdf/whatap-partner-faq.pdf
+
+    - name: Create Release
+      id: create_release
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.WHATAP_DOCS_TOKEN }}
+      with:
+        tag_name: 241212 # 생성할 Release의 태그 이름, 날짜를 입력하세요.
+        release_name: "241212" #날짜를 입력하세요.
+        body: "partner.whatap.io 페이지를 기준으로 자동 생성된 PDF 파일입니다."
+        draft: false
+        prerelease: false
+    
+    - name: Upload to Release whatap-site-management
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.WHATAP_DOCS_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: pdf/whatap-site-management.pdf
+        asset_name: whatap-site-management.pdf
+        asset_content_type: application/pdf
+
+    - name: Upload to Release whatap-server-installation
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.WHATAP_DOCS_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: pdf/whatap-server-installation.pdf
+        asset_name: whatap-server-installation.pdf
+        asset_content_type: application/pdf
+
+    - name: Upload to Release whatap-mxql-usage
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.WHATAP_DOCS_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: pdf/whatap-mxql-usage.pdf
+        asset_name: whatap-mxql-usage.pdf
+        asset_content_type: application/pdf
+
+    - name: Upload to Release whatap-partner-faq
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.WHATAP_DOCS_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: pdf/whatap-partner-faq.pdf
+        asset_name: whatap-partner-faq.pdf
+        asset_content_type: application/pdf

@@ -1,6 +1,6 @@
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@100;300;400;500;700;900&display=swap');
-@import url('https://fonts.googleapis.com/css?family=Noto+Sans+JP&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap');
 @import url('https://fonts.googleapis.com/css?family=Noto+Sans+Coptic&display=swap');
 
 @prince-pdf {
@@ -83,9 +83,6 @@
   html[lang='ko-KR'] {
     word-wrap: keep-all;
     font-family: 'Noto Sans KR', sans-serif, 'Apple SD Gothic Neo' !important;
-    h1, h2, h3, h4, h5, h6 {
-      font-family: 'Noto Sans KR', sans-serif, 'Apple SD Gothic Neo' !important;
-    }
     font-size: 10px;
   }
   body {
@@ -97,18 +94,12 @@
   html[lang='en-US'] {
     word-wrap: keep-all;
     font-family: 'Noto Sans', sans-serif, 'Apple SD Gothic Neo' !important;
-    h1, h2, h3, h4, h5, h6 {
-      font-family: 'Noto Sans', sans-serif, 'Apple SD Gothic Neo' !important;
-    }
   }
   
   html[lang='ja-JP'] {
     word-wrap: break-word;
     word-break: inherit;
     font-family: 'Noto Sans JP', 'Noto Sans', sans-serif, 'Apple SD Gothic Neo' !important;
-    h1, h2, h3, h4, h5, h6 {
-      font-family: 'Noto Sans JP', 'Noto Sans', sans-serif, 'Apple SD Gothic Neo' !important;
-    }
   }
 
   .redocusaurus div.redoc-wrap div.api-content {

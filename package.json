@@ -1,1 +1,1 @@
-{ "dependencies": { "docusaurus-prince-pdf": "^1.2.1" } }
+{ "dependencies": { "docusaurus-prince-pdf": "^1.2.1", "docusaurus-wkhtmltopdf": "^1.1.4" } }
