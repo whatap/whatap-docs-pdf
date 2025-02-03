@@ -1,1 +1,1 @@
-{ "dependencies": { "docusaurus-prince-pdf": "^1.2.1", "docusaurus-wkhtmltopdf": "^1.1.4" } }
+{ "dependencies": { "child_process": "^1.0.2", "docusaurus-prince-pdf": "^1.2.1", "fs": "^0.0.1-security", "jsdom": "^26.0.0", "node-fetch": "^3.3.2", "path": "^0.12.7", "yargs": "^17.7.2" } }

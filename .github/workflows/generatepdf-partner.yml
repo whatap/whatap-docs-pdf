@@ -40,13 +40,13 @@ jobs:
 
     - name: Build PDF
       run: |
-        npx docusaurus-prince-pdf -u https://whatap.github.io/server-op-docs/cover/cover-sitemng --prince-args="--page-size='a4' --page-margin='10mm' --style='./pdf-print.css'" -o ./pdf/whatap-site-management.pdf --dest ./pdf --include-index
+        node generate-pdf -u https://whatap.github.io/server-op-docs/cover/cover-sitemng --prince-args="--page-size='a4' --page-margin='10mm' --style='./pdf-print.css'" -o ./pdf/whatap-site-management.pdf --dest ./pdf --include-index
         pdfcpu annot remove -pages 1 ./pdf/whatap-site-management.pdf
-        npx docusaurus-prince-pdf -u https://whatap.github.io/server-op-docs/cover/cover-serverinstall --prince-args="--page-size='a4' --page-margin='10mm' --style='./pdf-print.css'" -o ./pdf/whatap-server-installation.pdf --dest ./pdf --include-index
+        node generate-pdf -u https://whatap.github.io/server-op-docs/cover/cover-serverinstall --prince-args="--page-size='a4' --page-margin='10mm' --style='./pdf-print.css'" -o ./pdf/whatap-server-installation.pdf --dest ./pdf --include-index
         pdfcpu annot remove -pages 1 ./pdf/whatap-server-installation.pdf
-        npx docusaurus-prince-pdf -u https://whatap.github.io/server-op-docs/cover/cover-mxql --prince-args="--page-size='a4' --page-margin='10mm' --style='./pdf-print.css'" -o ./pdf/whatap-mxql-usage.pdf --dest ./pdf --include-index
+        node generate-pdf -u https://whatap.github.io/server-op-docs/cover/cover-mxql --prince-args="--page-size='a4' --page-margin='10mm' --style='./pdf-print.css'" -o ./pdf/whatap-mxql-usage.pdf --dest ./pdf --include-index
         pdfcpu annot remove -pages 1 ./pdf/whatap-mxql-usage.pdf
-        npx docusaurus-prince-pdf -u https://whatap.github.io/server-op-docs/cover/cover-faq --prince-args="--page-size='a4' --page-margin='10mm' --style='./pdf-print.css'" -o ./pdf/whatap-partner-faq.pdf --dest ./pdf --include-index
+        node generate-pdf -u https://whatap.github.io/server-op-docs/cover/cover-faq --prince-args="--page-size='a4' --page-margin='10mm' --style='./pdf-print.css'" -o ./pdf/whatap-partner-faq.pdf --dest ./pdf --include-index
         pdfcpu annot remove -pages 1 ./pdf/whatap-partner-faq.pdf
 
     - name: Create Release
