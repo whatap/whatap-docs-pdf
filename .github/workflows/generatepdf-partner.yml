@@ -55,8 +55,8 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        tag_name: 241212 # 생성할 Release의 태그 이름, 날짜를 입력하세요.
-        release_name: "241212" #날짜를 입력하세요.
+        tag_name: 250310 # 생성할 Release의 태그 이름, 날짜를 입력하세요.
+        release_name: "250310" #날짜를 입력하세요.
         body: "partner.whatap.io 페이지를 기준으로 자동 생성된 PDF 파일입니다."
         draft: false
         prerelease: false
