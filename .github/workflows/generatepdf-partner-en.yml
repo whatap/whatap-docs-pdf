@@ -53,7 +53,7 @@ jobs:
       id: create_release
       uses: actions/create-release@v1
       env:
-        GITHUB_TOKEN: ${{ secrets.WHATAP_DOCS_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         tag_name: 241202@en # 생성할 Release의 태그 이름, 날짜를 입력하세요.
         release_name: "241202-EN" #날짜를 입력하세요.
@@ -64,7 +64,7 @@ jobs:
     - name: Upload to Release whatap-site-management
       uses: actions/upload-release-asset@v1
       env:
-        GITHUB_TOKEN: ${{ secrets.WHATAP_DOCS_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
         asset_path: pdf/whatap-site-management-en.pdf
@@ -74,7 +74,7 @@ jobs:
     - name: Upload to Release whatap-server-installation
       uses: actions/upload-release-asset@v1
       env:
-        GITHUB_TOKEN: ${{ secrets.WHATAP_DOCS_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
         asset_path: pdf/whatap-server-installation-en.pdf
@@ -84,7 +84,7 @@ jobs:
     - name: Upload to Release whatap-mxql-usage
       uses: actions/upload-release-asset@v1
       env:
-        GITHUB_TOKEN: ${{ secrets.WHATAP_DOCS_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
         asset_path: pdf/whatap-mxql-usage-en.pdf
@@ -94,7 +94,7 @@ jobs:
     - name: Upload to Release whatap-partner-faq
       uses: actions/upload-release-asset@v1
       env:
-        GITHUB_TOKEN: ${{ secrets.WHATAP_DOCS_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
         asset_path: pdf/whatap-partner-faq-en.pdf
